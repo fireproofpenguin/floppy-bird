@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://caessejkxuwqc"]
+[gd_scene load_steps=19 format=4 uid="uid://caessejkxuwqc"]
 
 [ext_resource type="PackedScene" uid="uid://cc750l5t302sb" path="res://scenes/bird.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://c2qhj6nle7r6o" path="res://scripts/main.gd" id="1_sugp2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4vmnwulb44wq" path="res://sprites/grass.png" id="4_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://cvqvsyxibhvh5" path="res://sprites/buildings.png" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://88lcouhb54tr" path="res://sprites/clouds.png" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://dbjqfrn420wfq" path="res://ui/score.tscn" id="7_o6xl0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sugp2"]
 texture = ExtResource("2_0wfyh")
@@ -98,7 +99,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_tipki"]
 resource_name = "Loop"
-length = 3.0
+length = 6.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -107,7 +108,7 @@ tracks/0/path = NodePath("Clouds:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3),
+"times": PackedFloat32Array(0, 6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-512, 0)]
@@ -134,8 +135,13 @@ _data = {
 &"RESET": SubResource("Animation_85g3d")
 }
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("bird", "background", "grass_animation", "cloud_animation", "building_animation")]
 script = ExtResource("1_sugp2")
+bird = NodePath("Bird")
+background = NodePath("Background")
+grass_animation = NodePath("GrassAnimation")
+cloud_animation = NodePath("CloudAnimation")
+building_animation = NodePath("BuildingAnimation")
 
 [node name="Background" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -253,3 +259,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_85g3d")
 }
 autoplay = "Loop"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Score" parent="HUD" instance=ExtResource("7_o6xl0")]
