@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dp8tpy8ndevr3"]
+[gd_scene load_steps=3 format=3 uid="uid://dp8tpy8ndevr3"]
 
+[ext_resource type="Script" uid="uid://dthe6rcobqo6j" path="res://scripts/game_over.gd" id="1_5eixk"]
 [ext_resource type="Theme" uid="uid://bwm1t03iwrurx" path="res://ui/ui_theme.tres" id="1_oo8kp"]
 
-[node name="GameOver" type="CenterContainer"]
-offset_right = 1280.0
-offset_bottom = 720.0
+[node name="GameOver" type="CenterContainer" node_paths=PackedStringArray("restart_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5eixk")
+restart_button = NodePath("MarginContainer/VBoxContainer/Button")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -16,8 +22,8 @@ layout_mode = 2
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_oo8kp")
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 128
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 80
 text = "Game Over"
 horizontal_alignment = 1
 
@@ -25,3 +31,5 @@ horizontal_alignment = 1
 layout_mode = 2
 theme = ExtResource("1_oo8kp")
 text = "Restart"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

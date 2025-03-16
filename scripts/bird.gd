@@ -2,7 +2,7 @@ class_name Bird extends RigidBody2D
 
 signal on_death
 
-@export var death_cutoff = 552
+@export var death_cutoff = 266
 
 @export var jump_force: float = 300.0
 
@@ -32,3 +32,7 @@ func _died():
 	freeze = true
 	has_died = true
 	on_death.emit()
+
+
+func _on_area_2d_body_entered(body):
+	_died()

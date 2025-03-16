@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dofij810d410p"]
+
+[ext_resource type="Script" uid="uid://dlrnp50jtfaqe" path="res://scripts/pipe.gd" id="1_8p0di"]
+[ext_resource type="Texture2D" uid="uid://dij1yvrr7nxio" path="res://sprites/pipe_top.png" id="1_8x3ej"]
+[ext_resource type="Texture2D" uid="uid://c41aix172skx0" path="res://sprites/pipe.png" id="2_arpqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p0di"]
+size = Vector2(22, 90)
+
+[node name="Pipe" type="AnimatableBody2D" node_paths=PackedStringArray("pipe_top", "pipe_body", "collision_shape")]
+script = ExtResource("1_8p0di")
+pipe_top = NodePath("PipeTop")
+pipe_body = NodePath("PipeBody")
+pipe_sprite = ExtResource("2_arpqm")
+collision_shape = NodePath("CollisionShape2D")
+flipped = true
+height = 5
+
+[node name="PipeTop" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 82)
+texture = ExtResource("1_8x3ej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 45)
+shape = SubResource("RectangleShape2D_8p0di")
+debug_color = Color(0.847305, 0.376052, 0, 0.42)
+
+[node name="PipeBody" type="Node2D" parent="."]
